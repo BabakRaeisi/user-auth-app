@@ -26,11 +26,14 @@ public class RegisterServlet extends HttpServlet {
             if (success) {
                 response.sendRedirect("login.jsp?registered=true");
             } else {
-                response.sendRedirect("register.jsp?error=1"); // Email already exists
+                // Forward to register.jsp (not accessible directly in WEB-INF)
+                request.setAttribute("error", "Email already exists");
+                request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
             }
         } catch (Exception e) {
             System.err.println("AWS CloudWatch Log - Registration Error: " + e.getMessage());
-            response.sendRedirect("register.jsp?error=2"); // Database error
+            request.setAttribute("error", "Database error");
+            request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
         }
     }
 }
