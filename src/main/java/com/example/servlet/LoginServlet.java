@@ -7,15 +7,6 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
-    
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
@@ -27,17 +18,12 @@ public class LoginServlet extends HttpServlet {
             User user = userDAO.validateUser(email, password);
             
             if (user != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", user);
-                response.sendRedirect("welcome.jsp"); // چون خارج از WEB-INF هست اوکیه
+                response.sendRedirect("welcome.jsp");
             } else {
-                request.setAttribute("error", "Invalid email or password");
-                request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+                response.sendRedirect("login.jsp?error=1");
             }
         } catch (Exception e) {
-            System.err.println("Login Error: " + e.getMessage());
-            request.setAttribute("error", "Internal server error");
-            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            response.sendRedirect("login.jsp?error=2");
         }
     }
 }
