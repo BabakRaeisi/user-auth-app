@@ -1,33 +1,30 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .container { width: 300px; margin: 0 auto; }
         .error { color: red; }
-        .success { color: green; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Login</h2>
+        <h2>Register</h2>
         
-        <%-- AWS-Compatible Error Handling --%>
         <% if (request.getParameter("error") != null) { %>
-            <p class="error">Invalid credentials. Try again.</p>
-        <% } %>
-        
-        <% if (request.getParameter("registered") != null) { %>
-            <p class="success">Registration successful! Please login.</p>
+            <p class="error">
+                <%= request.getParameter("error").equals("1") ? "Email already exists!" : "Database error. Try later." %>
+            </p>
         <% } %>
 
-        <form action="login" method="post">
+        <form action="register" method="post">
+            Name: <input type="text" name="name" required><br><br>
             Email: <input type="email" name="email" required><br><br>
             Password: <input type="password" name="password" required><br><br>
-            <input type="submit" value="Login">
+            <input type="submit" value="Register">
         </form>
-        <p>Don't have an account? <a href="register.jsp">Register here</a></p>
+        <p>Already have an account? <a href="login.jsp">Login here</a></p>
     </div>
 </body>
 </html>
