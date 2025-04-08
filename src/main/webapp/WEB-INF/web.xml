@@ -14,15 +14,8 @@
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-<servlet>
-    <servlet-name>HomeServlet</servlet-name>
-    <servlet-class>com.example.servlet.HomeServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>HomeServlet</servlet-name>
-    <url-pattern>/</url-pattern>
-</servlet-mapping>
 
+    <!-- Login Servlet -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.example.servlet.LoginServlet</servlet-class>
@@ -32,6 +25,7 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <!-- Register Servlet -->
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.example.servlet.RegisterServlet</servlet-class>
@@ -40,4 +34,5 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+
 </web-app>
